@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Layout from "../../Layout";
-import "./styles.css";
 import axios from "axios";
-import useToken from "../../Helper/useToken";
-import { API_BASE_URL } from "../../Constraint/api";
-import ResultView from "../ResultView";
+import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import { API_BASE_URL } from "../../Constraint/api";
+import useToken from "../../Helper/useToken";
+import Layout from "../../Layout";
+import ResultView from "../ResultView";
+import "./styles.css";
 
 const UserInfo = () => {
     const [scoreData, setScoreData] = useState({});
@@ -67,6 +67,8 @@ const UserInfo = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    console.log("check data: ", data);
 
     return (
         <Layout title="User Infor">
@@ -148,7 +150,7 @@ const UserInfo = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {data[0]?.histories?.map(
+                                                {data?.Histories?.map(
                                                     (item) => {
                                                         return (
                                                             <tr
@@ -165,24 +167,28 @@ const UserInfo = () => {
                                                                 </td>
                                                                 <td>
                                                                     {
-                                                                        item
-                                                                            .score
+                                                                        JSON.parse(
+                                                                            item.score
+                                                                        )
                                                                             .listening
                                                                     }
                                                                 </td>
                                                                 <td>
                                                                     {
-                                                                        item
-                                                                            .score
+                                                                        JSON.parse(
+                                                                            item.score
+                                                                        )
                                                                             .reading
                                                                     }
                                                                 </td>
                                                                 <td>
                                                                     {" "}
-                                                                    {item.score
-                                                                        .reading +
-                                                                        item
-                                                                            .score
+                                                                    {JSON.parse(
+                                                                        item.score
+                                                                    ).reading +
+                                                                        JSON.parse(
+                                                                            item.score
+                                                                        )
                                                                             .listening}
                                                                 </td>
                                                                 <td>

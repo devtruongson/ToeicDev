@@ -1,19 +1,16 @@
-import React, { Component, useState, useRef, useMemo } from "react";
-import ReactDOM from "react-dom";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Col, Button, Collapse, Container, Modal, Row } from "react-bootstrap";
+import React, { useRef, useState } from "react";
+import { Draggable } from "react-beautiful-dnd";
+import { Button, Col, Collapse, Container, Modal, Row } from "react-bootstrap";
 
-import QuizComponent2 from "./quiz.component";
-import TextInput from "./TextInput.component";
+import Axios from "axios";
 import JoditEditor from "jodit-react";
 import { useEffect } from "react";
-import Form from 'react-bootstrap/Form';
-import { Checkbox } from "@material-ui/core";
-import Axios from "axios";
 import { API_BASE_URL } from "../../Constraint/api";
+import QuizComponent2 from "./quiz.component";
+import TextInput from "./TextInput.component";
 
 
-function TableRow({ itemProps, id, index,HandleUpdateData }) {
+function TableRow({ itemProps, id, index, HandleUpdateData }) {
     // const [item, setItem] = useState(itemProps);
     const item = structuredClone(itemProps);
     console.log("itemProps:", item);
@@ -31,7 +28,7 @@ function TableRow({ itemProps, id, index,HandleUpdateData }) {
         // setItem(itemProps)
         setIsChange2(!isChange2);
         setPreviewContent(item);
-    }, [id,itemProps])
+    }, [id, itemProps])
 
     const handleClose = () => {
         console.log('aa');
@@ -56,30 +53,30 @@ function TableRow({ itemProps, id, index,HandleUpdateData }) {
         setContent({ type: type, input: fileTemp[type].preview })
         setFile(fileTemp);
     };
-    const handleUpload =  (type) => {
+    const handleUpload = (type) => {
         console.log(type);
         console.log(file[type]);
         let formData = new FormData();    //formdata object
-        if( !file[type].data){
+        if (!file[type].data) {
             console.log('Nothing to upload');
             return
         }
-            formData.append('file', file[type].data);  
-    
-            console.log(file);
-            setLoading(true);
-            Axios.post(API_BASE_URL + "upload-file-to-google-drive", formData)
-                .then(response => {
-                    const id = response.data.response.data.id;
-                    setContent({type:type,input:"https://drive.google.com/uc?id="+id});
-                    console.log(id);
-                    setLoading(false);
-                })
-                .catch(error => {
-                  setLoading(false);
-                    console.log(error);
-                });
-      };
+        formData.append('file', file[type].data);
+
+        console.log(file);
+        setLoading(true);
+        Axios.post(API_BASE_URL + "upload-file-to-google-drive", formData)
+            .then(response => {
+                const id = response.data.response.data.id;
+                setContent({ type: type, input: "https://drive.google.com/uc?id=" + id });
+                console.log(id);
+                setLoading(false);
+            })
+            .catch(error => {
+                setLoading(false);
+                console.log(error);
+            });
+    };
 
     const editor = useRef(null);
     // const [content, setContent] = useState(item.question.text);
@@ -148,7 +145,7 @@ function TableRow({ itemProps, id, index,HandleUpdateData }) {
             return;
         }
         const temp = previewContent;
-        if(!temp.answer.texts || !temp.answer.choices){
+        if (!temp.answer.texts || !temp.answer.choices) {
             return
         }
         if (temp.hasChild) {
@@ -196,50 +193,50 @@ function TableRow({ itemProps, id, index,HandleUpdateData }) {
         handleClose;
         setLoading(true);
         Axios
-          .delete(
-            API_BASE_URL + "api/question/" + id,
-            // JSON.stringify({}),
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          )
-          .then(function (response) {
-            console.log(response.data);
-            HandleUpdateData();
-            handleClose;
-            setLoading(false);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+            .delete(
+                API_BASE_URL + "api/question/" + id,
+                // JSON.stringify({}),
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            )
+            .then(function (response) {
+                console.log(response.data);
+                HandleUpdateData();
+                handleClose;
+                setLoading(false);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
     const HandleUpdate = () => {
         console.log("update");
         setLoading(true);
         console.log(previewContent);
-        const {_id,...temp}=previewContent
-        console.log('id',_id,'temp',temp);
+        const { _id, ...temp } = previewContent
+        console.log('id', _id, 'temp', temp);
         Axios
-          .post(
-            API_BASE_URL + "api/question/" + _id,
-            JSON.stringify(temp),
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          )
-          .then(function (response) {
-            console.log(response.data);
-            HandleUpdateData();
-            setLoading(false);
-          })
-          .catch(function (error) {
-            console.log(error);
-            setLoading(false);
-          });
+            .post(
+                API_BASE_URL + "api/question/" + _id,
+                JSON.stringify(temp),
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            )
+            .then(function (response) {
+                console.log(response.data);
+                HandleUpdateData();
+                setLoading(false);
+            })
+            .catch(function (error) {
+                console.log(error);
+                setLoading(false);
+            });
     };
 
     const config =
@@ -372,16 +369,16 @@ function TableRow({ itemProps, id, index,HandleUpdateData }) {
                                 <input type="file" accept="audio/*" onChange={(e) => handleFileChange(e, 'sound')} id="exampleInputFile" />
                                 <button
                                     className="btn btn-primary btn-sm mx-1"
-                                    style={{minWidth:100,minHeight:30}}
+                                    style={{ minWidth: 100, minHeight: 30 }}
                                     onClick={() => {
                                         handleUpload('sound');
                                     }}
-                                >{loading?<div className="mini-spinner"></div>:'Upload Sound'}
-                                    
+                                >{loading ? <div className="mini-spinner"></div> : 'Upload Sound'}
+
                                 </button>
                                 <button
                                     className="btn btn-danger btn-sm mx-1"
-                                    style={{minWidth:100,minHeight:30}}
+                                    style={{ minWidth: 100, minHeight: 30 }}
                                     onClick={() => {
                                         setContent({ type: 'image', input: '' })
                                         setIsChange(!isChange)
@@ -401,15 +398,15 @@ function TableRow({ itemProps, id, index,HandleUpdateData }) {
                                 <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'image')} id="exampleInputFile" />
                                 <button
                                     className="btn btn-primary btn-sm mx-1"
-                                    style={{minWidth:100,minHeight:30}}
+                                    style={{ minWidth: 100, minHeight: 30 }}
                                     onClick={() => {
                                         handleUpload('image');
                                     }}
-                                >{loading?<div className="mini-spinner"></div>:'Upload Image'}
-                                    
+                                >{loading ? <div className="mini-spinner"></div> : 'Upload Image'}
+
                                 </button>
                                 <button
-                                style={{minWidth:100,minHeight:30}}
+                                    style={{ minWidth: 100, minHeight: 30 }}
                                     className="btn btn-danger btn-sm mx-1"
                                     onClick={() => {
                                         setContent({ type: 'image', input: '' })
@@ -444,12 +441,12 @@ function TableRow({ itemProps, id, index,HandleUpdateData }) {
                                     <option value={'t6'}>Part 6 : reading 2</option>
                                     <option value={'t7'}>Part 7 : reading 3</option>
                                 </select>
-                                <div style={{ marginTop: 10 }} className="form-check">
+                                <div style={{ marginTop: 10, display: "none", }} className="form-check">
                                     <input className="form-check-input" type="checkbox"
                                         checked={previewContent.hasChild}
                                         onChange={(e) => setContent({ type: "hasChild", input: { hasChild: e.target.checked } })}
                                     />
-                                    <label className="form-check-label">Has Child</label>
+                                    <label className="form-check-label">Has Child 123</label>
                                 </div>
                                 {!previewContent.hasChild
                                     ? <>
@@ -547,12 +544,12 @@ function TableRow({ itemProps, id, index,HandleUpdateData }) {
                         Delete
                     </button>
                 </Modal.Footer>
-            </Modal>    
+            </Modal>
             {loading ? (
-        <div className="loader-container">
-      	  <div className="spinner"></div>
-        </div>
-      ) :null}
+                <div className="loader-container">
+                    <div className="spinner"></div>
+                </div>
+            ) : null}
         </Row>
     );
 }

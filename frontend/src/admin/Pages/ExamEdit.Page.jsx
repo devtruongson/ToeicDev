@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Col, Button, Collapse, Container, Modal, Row } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import Axios from "axios";
+import JoditEditor from "jodit-react";
+import React, { useCallback, useRef, useState } from "react";
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
+import { API_BASE_URL } from "../../Constraint/api";
+import QuizComponent2 from "../components/quiz.component";
 import TableComponent from "../components/table.component";
 import TextInput from "../components/TextInput.component";
-import JoditEditor from "jodit-react";
-import { API_BASE_URL } from "../../Constraint/api";
-import Axios from "axios";
-import QuizComponent2 from "../components/quiz.component";
 import "./ExamEdit.Page.css";
 
 function ExamEditPage(props) {
@@ -464,7 +463,10 @@ function ExamEditPage(props) {
                                     </option>
                                 </select>
                                 <div
-                                    style={{ marginTop: 10 }}
+                                    style={{
+                                        marginTop: 10,
+                                        display: "none",
+                                    }}
                                     className="form-check"
                                 >
                                     <input

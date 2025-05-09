@@ -1,16 +1,14 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import Layout from "../../Layout";
-import "./index.css";
-import QuizComponent from "../../Components/QuizComponent";
-import { Button, Card, Container, Row, Col, Pagination } from "react-bootstrap";
-import { useTimer } from "react-timer-hook";
-import { useRef } from "react";
-import ResultView from "../ResultView";
-import useToken from "../../Helper/useToken";
-import { NavLink, useParams } from "react-router-dom";
 import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Card, Col, Container, Pagination, Row } from "react-bootstrap";
+import { NavLink, useParams } from "react-router-dom";
+import { useTimer } from "react-timer-hook";
+import QuizComponent from "../../Components/QuizComponent";
 import { API_BASE_URL } from "../../Constraint/api";
+import useToken from "../../Helper/useToken";
+import Layout from "../../Layout";
+import ResultView from "../ResultView";
+import "./index.css";
 
 function ExamView(props) {
     const { id } = useParams();
@@ -259,6 +257,9 @@ function ExamView(props) {
             </Layout>
         );
     }
+
+    console.log("check dataOrder: ", dataOrder);
+
     return (
         <Layout>
             <div className="Home">
