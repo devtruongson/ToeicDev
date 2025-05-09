@@ -1,20 +1,62 @@
-a.button-text,
-.button-text:visited {
-  color: white;
-  text-decoration: none;
-}
-#banner{
-  background-image:url('../../asset/toeic2.jpg');background-repeat:no-repeat;background-position:50% 50%;
-  width: '100%';
-  height: 400px;
+
+#banner {
+  background-image: url('../../asset/toeic2.jpg');
+  background-repeat: no-repeat;
+  background-position: right;
   background-size: 650px;
   background-color: #d6ecfa;
-  background-position: right;
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+  padding: 40px 30px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+#banner h1 {
+  font-size: 2.5rem;
+  color: #1a365d;
+  font-weight: 600;
+  margin: 20px 0;
+  max-width: 60%;
+}
+
+#banner .button {
+  background-color: #FE665E !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 10px 25px !important;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative !important;
+  bottom: auto !important;
+  margin: 20px 0 !important;
+  display: inline-block !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+#banner .button:hover {
+  background-color: #e55a52 !important;
+}
+
+#banner .button-text {
+  color: white !important;
+  text-decoration: none !important;
+  display: block;
 }
 
 @media (max-width: 767px) {
-  #banner{
+  #banner {
     background-size: 400px;
-    height: 200px;
+    height: 250px;
+    padding: 20px;
+  }
+  
+  #banner h1 {
+    font-size: 1.8rem;
+    max-width: 80%;
   }
 }

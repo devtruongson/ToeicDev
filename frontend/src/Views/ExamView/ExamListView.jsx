@@ -1,171 +1,171 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import Layout from "../../Layout";
 import "./styles.css";
-import QuizComponent from "../../Components/QuizComponent";
-import { Button, Card, Container, Row, Col, Pagination } from "react-bootstrap";
-// import { Grid, Card, Text } from "@nextui-org/react";
+import { Button, Card, Container, Row, Col } from "react-bootstrap";
 import { useTimer } from "react-timer-hook";
-// import data from "../../test/dataTest.json";
-import { useRef } from "react";
-import ResultView from "../ResultView";
-import useToken from "../../Helper/useToken";
 import LoginView from "../AuthView/LoginView";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import useToken from "../../Helper/useToken";
 import axios from "axios";
 import { API_BASE_URL } from "../../Constraint/api";
+import { Link, useHistory } from "react-router-dom";
 
 function ExamListView() {
-  const { token, setToken } = useToken();
-  let expiryTimestamp = new Date().setHours(new Date().getHours() + 2);
-  const {
-    seconds,
-    minutes,
-    hours,
-    days,
-    isRunning,
-    start,
-    pause,
-    resume,
-    restart,
-  } = useTimer({
-    autoStart: false,
-    expiryTimestamp,
-    onExpire: () => console.warn("onExpire called"),
-  });
-  const history = useHistory();
-
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const { data: response } = await axios.get(
-        API_BASE_URL + "api/exam/all"
-      );
-      setData(response);
-      //   console.log(response);
-    } catch (error) {
-      console.error(error.message);
-    }
-    setLoading(false);
-  };
-  // console.log(data);
-  useEffect(() => {
-    fetchData();
-  }, []);
-  const HandleStart = (exam) => {
-    console.log(exam);
-    history.push(`/examTest/${exam._id}`, {
-      exam: "exam",
+    const { token, setToken } = useToken();
+    let expiryTimestamp = new Date().setHours(new Date().getHours() + 2);
+    const {
+        seconds,
+        minutes,
+        hours,
+        days,
+        isRunning,
+        start,
+        pause,
+        resume,
+        restart,
+    } = useTimer({
+        autoStart: false,
+        expiryTimestamp,
+        onExpire: () => console.warn("onExpire called"),
     });
-  };
+    const history = useHistory();
 
-  const TestInforCard = ({ exam }) => {
-    return (
-      <Row>
-        <Col></Col>
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
 
-        <Col>
-          <Card
-            className="text-center"
-            style={{
-              width: "20rem",
-              padding: "2rem",
-              backgroundColor: "#ebd081",
-            }}
-          >
-            <Card.Img
-              variant="top"
-              src="https://vietmybinhduong.edu.vn/wp-content/uploads/2022/08/t1.jpg"
-            />
-            <Card.Body>
-              <Card.Title>{exam.Name} :</Card.Title>
-              <Card.Text>
-                {/* Số lượng câu hỏi : 100 câu <br />
-                Thời gian làm bài thi : 120 phút <br /> */}
-              </Card.Text>
-              <Button
-                className="button"
-                variant="primary"
-                onClick={() => HandleStart(exam)}
-              >
-                <Link
-                  to={{
-                    pathname: "/template",
-                    search: "?query=abc",
-                    state: { detail: "response.data " },
-                  }}
-                  replace
-                >
-                  Bắt đầu thi thử
-                </Link>
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col></Col>
-      </Row>
-    );
-  };
-  if (!token) {
+    const fetchData = async () => {
+        setLoading(true);
+        try {
+            const { data: response } = await axios.get(
+                API_BASE_URL + "api/exam/all"
+            );
+            setData(response);
+        } catch (error) {
+            console.error(error.message);
+        }
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const HandleStart = (exam) => {
+        history.push(`/examTest/${exam.id}`, {
+            exam: "exam",
+        });
+    };
+
+    const TestInforCard = ({ exam }) => {
+        return (
+            <Col md={4} sm={6} xs={12} className="exam-card-container">
+                <div className="exam-card">
+                    <div className="exam-card-content">
+                        <div className="exam-card-image">
+                            <img
+                                src="https://vietmybinhduong.edu.vn/wp-content/uploads/2022/08/t1.jpg"
+                                alt={`${exam.Name} cover`}
+                            />
+                        </div>
+                        <h3 className="exam-card-title">{exam.Name}</h3>
+                        <div className="exam-card-details">
+                            <div className="exam-detail">
+                                <span className="exam-detail-icon">⏱️</span>
+                                <span>120 phút</span>
+                            </div>
+                            <div className="exam-detail">
+                                <span className="exam-detail-icon">📝</span>
+                                <span>100 câu hỏi</span>
+                            </div>
+                        </div>
+                        <div className="exam-action">
+                            <button
+                                className="start-exam-btn"
+                                onClick={() => HandleStart(exam)}
+                            >
+                                Bắt đầu thi thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </Col>
+        );
+    };
+
+    if (!token) {
+        return (
+            <Layout>
+                <div className="login-container">
+                    <div className="login-card">
+                        <div className="login-illustration">
+                            <img
+                                src="/images/login-illustration.svg"
+                                alt="Login"
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src =
+                                        "https://vietmybinhduong.edu.vn/wp-content/uploads/2022/08/t1.jpg";
+                                }}
+                            />
+                        </div>
+                        <h2>Đăng nhập để làm bài thi thử TOEIC</h2>
+                        <p className="login-message">
+                            Vui lòng đăng nhập hoặc đăng ký tài khoản để bắt đầu
+                            làm bài thi
+                        </p>
+                        <div className="login-actions">
+                            <Link to="/Login" className="login-btn">
+                                Đăng nhập
+                            </Link>
+                            <Link to="/Register" className="register-btn">
+                                Đăng ký
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </Layout>
+        );
+    }
+
     return (
-      <Layout>
-        <Row>
-          <Col></Col>
-          <Col>
-            <Row>
-              <h2>Đăng nhập để làm bài thi thử Toeic</h2>
-            </Row>
-            <Row>
-              <Button
-                style={{ display: "inline-block", margin: "auto" }}
-                className="button"
-                variant="primary"
-                // onClick={HandleStart}
-              >
-                <Link className={"button-text"} exact to={"/Login"}>
-                  Ấn vào đây để đi đến trang đăng nhập
-                </Link>
-              </Button>
-              <Button
-                style={{ display: "inline-block", marginTop: 20 }}
-                className="button"
-                variant="primary"
-                // onClick={HandleStart}
-              >
-                <Link className={"button-text"} exact to={"/Register"}>
-                  Hoặc ấn vào đây để đăng ký tài khoản
-                </Link>
-              </Button>
-            </Row>
-          </Col>
-          <Col></Col>
-        </Row>
-      </Layout>
+        <Layout>
+            <div className="exam-list-header">
+                <div className="container">
+                    <h1>Danh sách bài thi TOEIC</h1>
+                    <p>
+                        Chọn bài thi để luyện tập và cải thiện kỹ năng tiếng Anh
+                        của bạn
+                    </p>
+                </div>
+            </div>
+
+            <div className="exam-list-section">
+                <Container>
+                    <Row className="exam-list">
+                        {data
+                            .sort((a, b) => {
+                                if (a.id.toLowerCase() < b.id.toLowerCase())
+                                    return -1;
+                                if (a.id.toLowerCase() > b.id.toLowerCase())
+                                    return 1;
+                                return 0;
+                            })
+                            .map((item) => (
+                                <TestInforCard key={item.id} exam={item} />
+                            ))}
+                    </Row>
+                </Container>
+            </div>
+
+            {loading && (
+                <div className="loader-container">
+                    <div className="loader">
+                        <div className="spinner"></div>
+                        <p>Đang tải...</p>
+                    </div>
+                </div>
+            )}
+        </Layout>
     );
-  }
-  return (
-    <Layout>
-      <div className="Home">
-        <Container className="Container">
-          {data.sort(function(a, b) {
-            if(a._id.toLowerCase() < b._id.toLowerCase()) return -1;
-            if(a._id.toLowerCase() > b._id.toLowerCase()) return 1;
-            return 0;
-          }).map((item) => {
-            return <TestInforCard key={item._id} exam={item} />;
-          })}
-        </Container>
-      </div>
-      {loading ? (
-        <div className="loader-container">
-      	  <div className="spinner"></div>
-        </div>
-      ) :null}
-    </Layout>
-  );
 }
 
 export default ExamListView;

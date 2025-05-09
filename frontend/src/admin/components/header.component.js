@@ -1,41 +1,44 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-const HeaderComponent=({match})=>{
-    return(
-        <nav 
-        // style={{position:'fixed',width:'83%'}} 
-        // className="main-header navbar navbar-expand navbar-white navbar-light">
-        className="navbar navbar-inverse navbar-expand navbar-static-top hidden-lg">
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <a
-              className="nav-link"
-              data-widget="pushmenu"
-              href="#"
-              role="button"
-            >
-              <i className="fas fa-bars"></i>
-            </a>
-          </li>
-            {/* <li className="nav-item">
+const HeaderComponent = ({ match }) => {
+    return (
+        <nav
+            // style={{position:'fixed',width:'83%'}}
+            // className="main-header navbar navbar-expand navbar-white navbar-light">
+            className="navbar navbar-inverse navbar-expand navbar-static-top hidden-lg"
+        >
+            <ul className="navbar-nav">
+                <li className="nav-item">
+                    <a
+                        className="nav-link"
+                        data-widget="pushmenu"
+                        href="#"
+                        role="button"
+                    >
+                        <i className="fas fa-bars"></i>
+                    </a>
+                </li>
+                {/* <li className="nav-item">
                 <Link to={`${match.url}/index`} className="nav-link">Index</Link>
             </li>
             <li className="nav-item">
                 <Link to={`/Exam`} className="nav-link">Exam</Link>
             </li> */}
-            <li className="nav-item">
-                <Link to={`/Exam2`} className="nav-link">Exam</Link>
-            </li>
-            {/* <li className="nav-item">
+                <li className="nav-item">
+                    <Link to={`/Exam2`} className="nav-link">
+                        Exam
+                    </Link>
+                </li>
+                {/* <li className="nav-item">
                 <Link to={`/Edit/aa`} className="nav-link">Exam2</Link>
             </li>
             <li className="nav-item">
                 <Link to={`/test`} className="nav-link">test</Link>
             </li> */}
-        </ul>
+            </ul>
 
-        {/* <ul className="navbar-nav ml-auto">
+            {/* <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <a
               className="nav-link"
@@ -201,7 +204,7 @@ const HeaderComponent=({match})=>{
             </a>
           </li>
         </ul> */}
-      </nav>
-    )
-}
+        </nav>
+    );
+};
 export default HeaderComponent;

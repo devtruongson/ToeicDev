@@ -1,4 +1,5 @@
-var __html = [`
+var __html = [
+    `
 <div id="tab4" class="toggle-content">
     <div><h2 class="page-title">Bài 1: Contracts - Hợp Đồng</h2></div>
     
@@ -327,7 +328,8 @@ var __html = [`
     </div>
     <div style="clear:both;"></div>
                                     
-</div>`,`<div id="tab4" class="toggle-content">
+</div>`,
+    `<div id="tab4" class="toggle-content">
 <div align="center"><h2 class="page-title">Bài 2: Marketing - Nghiên Cứu Thị Trường</h2></div>
 
                                  <div class="tuvung">
@@ -645,7 +647,8 @@ Sự hài lòng của bạn được bảo đảm, hoặc là bạn sẽ đượ
 </div>
 <div style="clear:both;"></div>
                                 
-</div>`,`<div class="lesson-content">
+</div>`,
+    `<div class="lesson-content">
 <div id="tab4" class="toggle-content">
     <div align="center"><h2 class="page-title">Bài 3: Warrranties - Sự Bảo Hành</h2></div>
 
@@ -964,7 +967,8 @@ Sự hài lòng của bạn được bảo đảm, hoặc là bạn sẽ đượ
                                     
 </div> <!-- /.toggle-content -->
 
-</div>`,`<div id="tab4" class="toggle-content">
+</div>`,
+    `<div id="tab4" class="toggle-content">
 <div align="center"><h2 class="page-title">Bài 4: Business Planning - Kế Hoạch Kinh Doanh</h2></div>
 
                                  <div class="tuvung">
@@ -1281,7 +1285,8 @@ Sự hài lòng của bạn được bảo đảm, hoặc là bạn sẽ đượ
 </div>
 <div style="clear:both;"></div>
                                 
-</div>`,`<div id="tab4" class="toggle-content">
+</div>`,
+    `<div id="tab4" class="toggle-content">
 <div align="center"><h2 class="page-title">Bài 5: Conferences - Hội Nghị</h2></div>
 
 
@@ -1602,7 +1607,8 @@ Chúng tôi không có đủ người tham dự cuộc họp, vì vậy chúng t
 </div>
 <div style="clear:both;"></div>
                                 
-</b></div>`,`<div id="tab4" class="toggle-content">
+</b></div>`,
+    `<div id="tab4" class="toggle-content">
 <div align="center"><h2 class="page-title">Bài 6: Computers and the Internet - Máy Vi Tính và Mạng Internet</h2></div>
 
                                  <div class="tuvung">
@@ -1920,7 +1926,8 @@ Hệ điều hành không tương thích với kiểu máy tính này</b><br><br
 </div>
 <div style="clear:both;"></div>
                                 
-</div>`,`<div id="tab4" class="toggle-content">
+</div>`,
+    `<div id="tab4" class="toggle-content">
 <div align="center"><h2 class="page-title">Bài 7: Office Technology - Công Nghệ Cho Công Sở</h2></div>
 
                                  <div class="tuvung">
@@ -2238,7 +2245,8 @@ Màn hình máy tính khiến cho cô ta khó chịu về mặt thể chất</b>
 </div>
 <div style="clear:both;"></div>
                                 
-</div>`,`<div id="tab4" class="toggle-content">
+</div>`,
+    `<div id="tab4" class="toggle-content">
 <div align="center"><h2 class="page-title">Bài 8: Office Procedures - Các Quy Trình Trong Công Sở</h2></div>
 
                                  <div class="tuvung">
@@ -2554,7 +2562,8 @@ Màn hình máy tính khiến cho cô ta khó chịu về mặt thể chất</b>
 </div>
 <div style="clear:both;"></div>
                                 
-</b></div>`,`<div id="tab4" class="toggle-content">
+</b></div>`,
+    `<div id="tab4" class="toggle-content">
 <div align="center"><h2 class="page-title">Bài 9: Electronics - Điện Tử</h2></div>
 
                                  <div class="tuvung">
@@ -2870,7 +2879,8 @@ Màn hình máy tính khiến cho cô ta khó chịu về mặt thể chất</b>
 </div>
 <div style="clear:both;"></div>
                                 
-</div>`,`<div id="tab4" class="toggle-content">
+</div>`,
+    `<div id="tab4" class="toggle-content">
 <div align="center"><h2 class="page-title">Bài 10: Correspondence - Thư Tín Thương Mại</h2></div>
 
                                  <div class="tuvung">
@@ -3187,6 +3197,7 @@ Màn hình máy tính khiến cho cô ta khó chịu về mặt thể chất</b>
 </div>
 <div style="clear:both;"></div>
                                 
-</div>`]
+</div>`,
+];
 
 export default __html;
