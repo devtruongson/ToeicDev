@@ -232,7 +232,7 @@ function ExamEditPage(props) {
                 </section>
 
                 <section className="content">
-                    <div className="card">
+                    <div className="card_">
                         <div className="card-header">
                             <h3 className="card-title">Thông tin về bài thi</h3>
 
@@ -259,7 +259,7 @@ function ExamEditPage(props) {
                             />
                         </div>
                     </div>
-                    <div className="card">
+                    <div className="card_">
                         <div className="card-header">
                             <h3 className="card-title">
                                 Danh sách câu hỏi của đề thi

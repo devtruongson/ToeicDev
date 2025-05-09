@@ -1,16 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Layout from "../../Layout";
-import "./styles.css";
+import "./index.css";
 import QuizComponent from "../../Components/QuizComponent";
 import { Button, Card, Container, Row, Col, Pagination } from "react-bootstrap";
-// import { Grid, Card, Text } from "@nextui-org/react";
 import { useTimer } from "react-timer-hook";
-// import data from "../../test/dataTest.json";
 import { useRef } from "react";
 import ResultView from "../ResultView";
 import useToken from "../../Helper/useToken";
-import LoginView from "../AuthView/LoginView";
 import { NavLink, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../../Constraint/api";
@@ -49,10 +46,19 @@ function ExamView(props) {
             const { data: response } = await axios.get(
                 API_BASE_URL + "api/exam/all"
             );
-            setData(response.filter((item) => item.id == id));
+            setData(response.filter((item) => item._id == id));
             setDataOrder(
-                response.filter((item) => item.id == id)[0].question ||
-                    [].sort((a, b) => a.newOrder - b.newOrder)
+                response
+                    .filter((item) => item._id == id)[0]
+                    .question.sort((a, b) => a.newOrder - b.newOrder)
+            );
+            console.log(
+                response[0].question.flatMap((item) => {
+                    if (item.hasChild) {
+                        return [item, ...item.childCard];
+                    }
+                    return item;
+                })
             );
         } catch (error) {
             console.error(error.message);
@@ -73,7 +79,7 @@ function ExamView(props) {
             .post(
                 API_BASE_URL + "api/history/",
                 JSON.stringify({
-                    examId: data[0].id,
+                    examId: data[0]._id,
                     answers: answer,
                     time: 7200 - (hours * 60 * 60 + minutes * 60 + seconds),
                 }),
@@ -105,15 +111,15 @@ function ExamView(props) {
     const dataProcess = (data) => {
         // console.log("item", data);
         const data1 = data;
-        const data2 = (data[0]?.question || []).map((item, index) => {
+        const data2 = data[0].question.map((item, index) => {
             // console.log("it", item);
             var questionList;
             // console.log("item", item);
             if (item.hasChild == 1) {
-                const temp = item?.childCard || [];
+                const temp = item.childCard;
                 questionList = temp.map((item2) => {
                     const questionListReturn = {
-                        id: item2.id,
+                        id: item2._id,
                         question: item2.question.text,
                         answer: [
                             ...item2.answer.texts,
@@ -129,7 +135,7 @@ function ExamView(props) {
                 // console.log("ql", questionList);
                 questionList = [
                     {
-                        id: item.id,
+                        id: item._id,
                         question: item.question.text,
                         answer: [
                             ...item.answer.texts,
@@ -143,7 +149,7 @@ function ExamView(props) {
                 ];
             }
             const itemReturn = {
-                id: item.id,
+                id: item._id,
                 audio: item.question.sound ? item.question.sound : null,
                 image: item.question.image
                     ? `${item.question.image}`
@@ -273,28 +279,27 @@ function ExamView(props) {
                                 </Col>
                             </Row>
                             <Row>
-                                {dataProcess(data) ||
-                                    []
-                                        .sort((a, b) => a.newOrder - b.newOrder)
-                                        .map((item, index) => {
-                                            return (
-                                                <div
-                                                    key={item.id}
-                                                    className={`topic ${
-                                                        activeTopic === index
-                                                            ? "Active"
-                                                            : "Inactive"
-                                                    }`}
-                                                >
-                                                    <QuizComponent
-                                                        DataQuestion={item}
-                                                        HandleNextQuestion={
-                                                            HandleNextQuestion
-                                                        }
-                                                    />
-                                                </div>
-                                            );
-                                        })}
+                                {dataProcess(data)
+                                    .sort((a, b) => a.newOrder - b.newOrder)
+                                    .map((item, index) => {
+                                        return (
+                                            <div
+                                                key={item.id}
+                                                className={`topic ${
+                                                    activeTopic === index
+                                                        ? "Active"
+                                                        : "Inactive"
+                                                }`}
+                                            >
+                                                <QuizComponent
+                                                    DataQuestion={item}
+                                                    HandleNextQuestion={
+                                                        HandleNextQuestion
+                                                    }
+                                                />
+                                            </div>
+                                        );
+                                    })}
                             </Row>
                             <Row style={{ marginTop: 100 }}>
                                 <Col></Col>
@@ -344,8 +349,8 @@ function ExamView(props) {
                                             </Pagination.Item>
                                         ) : null}
                                         <Pagination.Item active>
-                                            {dataOrder[activeTopic]?.newOrder}
-                                            {dataOrder[activeTopic]?.hasChild
+                                            {dataOrder[activeTopic].newOrder}
+                                            {dataOrder[activeTopic].hasChild
                                                 ? "-" +
                                                   (dataOrder[activeTopic]
                                                       .newOrder +

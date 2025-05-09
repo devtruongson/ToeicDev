@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const HeaderComponent = ({ match }) => {
@@ -25,6 +26,15 @@ const HeaderComponent = ({ match }) => {
             <li className="nav-item">
                 <Link to={`/Exam`} className="nav-link">Exam</Link>
             </li> */}
+                <li className="nav-item">
+                    <Button
+                        onClick={() => {
+                            window.location.href = "/";
+                        }}
+                    >
+                        Home
+                    </Button>
+                </li>
                 <li className="nav-item">
                     <Link to={`/Exam2`} className="nav-link">
                         Exam

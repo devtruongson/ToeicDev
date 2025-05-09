@@ -36,7 +36,7 @@ function ExamPage() {
                     return;
                 }
 
-                history.push(`/edit/${response.data.exam.id}`, {
+                history.push(`/edit/${response.data.exam._id}`, {
                     exam: response.data.exam,
                 });
                 console.log(response.data.exam);
@@ -98,7 +98,7 @@ function ExamPage() {
         const handleShow = () => setShow(true);
         return (
             <tr>
-                <td>{exam.id}</td>
+                <td>{exam._id}</td>
                 <td>
                     <a>{exam.Name}</a>
                 </td>
@@ -109,7 +109,7 @@ function ExamPage() {
                 </td>
                 <td className="project-actions text-right">
                     <button
-                        onClick={() => HandleEditExam(exam.id, exam)}
+                        onClick={() => HandleEditExam(exam._id, exam)}
                         className="btn btn-info btn-sm mx-1"
                         href="#"
                     >
@@ -143,7 +143,7 @@ function ExamPage() {
                             className="btn btn-danger btn-sm mx-1"
                             variant="primary"
                             onClick={() => {
-                                HandleDeleteExam(exam.id);
+                                HandleDeleteExam(exam._id);
                                 handleClose;
                             }}
                         >
@@ -179,7 +179,7 @@ function ExamPage() {
                 </section>
 
                 <section className="content">
-                    <div className="card">
+                    <div className="card_">
                         <div className="card-header">
                             <h3 className="card-title">Danh sách đề thi thử</h3>
 

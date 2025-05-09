@@ -5,9 +5,15 @@
   margin-left: 8%;
 }
 .submit-button {
-  position: absolute;
-  right: 250px;
+  
+  /* position: absolute; */
+  /* right: 250px; */
 }
 .paragraph {
   width: 50em;
+}
+
+.form-submit{
+  display: flex;
+  justify-content: end;
 }

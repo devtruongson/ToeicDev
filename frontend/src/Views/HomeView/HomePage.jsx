@@ -27,7 +27,7 @@ function ToeicInforView() {
                             className="button"
                         >
                             <NavLink
-                                className={"button-text"}
+                                className={"button-nav"}
                                 exact
                                 to={"/Exam"}
                             >
@@ -48,7 +48,7 @@ function ToeicInforView() {
                         variant="primary"
                     >
                         <NavLink
-                            className={"button-text"}
+                            className={"button-nav"}
                             exact
                             to={"/ToeicInfor"}
                         >
@@ -71,7 +71,7 @@ function ToeicInforView() {
                         className="button"
                         variant="primary"
                     >
-                        <NavLink className={"button-text"} exact to={"/Exam"}>
+                        <NavLink className={"button-nav"} exact to={"/Exam"}>
                             Làm bài thi Toeic
                         </NavLink>
                     </Button>
@@ -88,7 +88,7 @@ function ToeicInforView() {
                         variant="primary"
                     >
                         <a
-                            className={"button-text"}
+                            className={"button-nav"}
                             href={
                                 "https://cla.hust.edu.vn/cat/danh-sach-lich-thi/"
                             }
@@ -113,7 +113,7 @@ function ToeicInforView() {
                         variant="primary"
                     >
                         <NavLink
-                            className={"button-text"}
+                            className={"button-nav"}
                             exact
                             to={"/Information"}
                         >
@@ -138,11 +138,7 @@ function ToeicInforView() {
                         className="button"
                         variant="primary"
                     >
-                        <NavLink
-                            className={"button-text"}
-                            exact
-                            to={"/Summary"}
-                        >
+                        <NavLink className={"button-nav"} exact to={"/Summary"}>
                             Xem chi tiết
                         </NavLink>
                     </Button>

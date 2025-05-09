@@ -50,7 +50,7 @@ function ExamListView() {
     }, []);
 
     const HandleStart = (exam) => {
-        history.push(`/examTest/${exam.id}`, {
+        history.push(`/examTest/${exam._id}`, {
             exam: "exam",
         });
     };
@@ -143,14 +143,14 @@ function ExamListView() {
                     <Row className="exam-list">
                         {data
                             .sort((a, b) => {
-                                if (a.id.toLowerCase() < b.id.toLowerCase())
+                                if (a._id.toLowerCase() < b._id.toLowerCase())
                                     return -1;
-                                if (a.id.toLowerCase() > b.id.toLowerCase())
+                                if (a._id.toLowerCase() > b._id.toLowerCase())
                                     return 1;
                                 return 0;
                             })
                             .map((item) => (
-                                <TestInforCard key={item.id} exam={item} />
+                                <TestInforCard key={item._id} exam={item} />
                             ))}
                     </Row>
                 </Container>
