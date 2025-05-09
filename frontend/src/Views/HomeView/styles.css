@@ -1,0 +1,20 @@
+a.button-text,
+.button-text:visited {
+  color: white;
+  text-decoration: none;
+}
+#banner{
+  background-image:url('../../asset/toeic2.jpg');background-repeat:no-repeat;background-position:50% 50%;
+  width: '100%';
+  height: 400px;
+  background-size: 650px;
+  background-color: #d6ecfa;
+  background-position: right;
+}
+
+@media (max-width: 767px) {
+  #banner{
+    background-size: 400px;
+    height: 200px;
+  }
+}
